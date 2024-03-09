@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  justify-content: center;
+  height: 99vh;
+  width: 100%;
+}
+
+.error-message {
+  color: red;
+}
+.div-campos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+a {
+  cursor: pointer;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+.img-container {
+  display: none;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.msg-login {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+}
+.msg-register {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  text-decoration: none;
+}
+
+.div-btn-signin {
+  margin-bottom: 1.13rem;
+}
+
+.div-form {
+  display: flex;
+  width: 19.5rem;
+  height: 16.9375rem;
+  padding-bottom: 0.1875rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.125rem;
+}
+
+.google-logo {
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (min-width: 1060px) {
+  .container {
+    justify-content: flex-start;
+  }
+  .img-container {
+    display: block;
+  }
+  .img-container img {
+    height: 100%;
+  }
+
+  .form-container h5 {
+    font-size: 3rem !important;
+    margin-bottom: 3rem;
+  }
+
+  .form-container {
+    width: 70%;
+  }
+
+  .div-form {
+    width: 32.313rem;
+  }
+}

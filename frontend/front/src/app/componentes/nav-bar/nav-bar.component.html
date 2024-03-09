@@ -1,0 +1,84 @@
+<ng-container *ngIf="user$ | async as user">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu class="mat-menu" #menu="matMenu">
+      <div class="info-user">
+        <div class="info-user-text">
+          <span id="username-info">{{user.name}}</span>
+          <span id="username-email-info">{{user.email}}</span>
+        </div>
+      </div>
+      <div class="divider">
+        <div class="divider-row"></div>
+      </div>
+      <div class="sections">
+        <a *ngIf="isMobile" href="/profile/info" mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span class="sections-text">Meu perfil</span>
+        </a>
+        <button mat-menu-item>
+          <span class="sections-text" routerLink="/profile">Meus projetos</span>
+        </button>
+        <button mat-menu-item>
+          <span class="sections-text" routerLink="/discover">Descobrir</span>
+        </button>
+        <div class="divider">
+          <div class="divider-row"></div>
+        </div>
+        <button (click)="signOut()" mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="sections-text">Sair</span>
+        </button>
+      </div>
+    </mat-menu>
+    <div class="right-side">
+      <div class="div-logo">
+        <a routerLink="/profile">
+          <mat-icon id="icon-logo" svgIcon="Logo Orange Juice">menu</mat-icon>
+        </a>
+      </div>
+      <div class="sections" fxShow.gt-sm fxHide.lt-md>
+        <a id="my-projects" routerLink="/profile">Meus Projetos</a>
+        <a id="discover" routerLink="/discover">Descobrir</a>
+      </div>
+    </div>
+    <div class="div-icons">
+      <a class="div-profile-img" routerLink="/profile/info" *ngIf="isMobile">
+        <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}">
+      </a>
+      <a class="div-profile-img" *ngIf="!isMobile" [matMenuTriggerFor]="menu2">
+        <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}">
+      </a>
+      <mat-menu class="mat-menu" #menu2="matMenu">
+        <div class="info-user">
+          <div class="info-user-text">
+            <span id="username-info">{{user.name}}</span>
+            <span id="username-email-info">{{user.email}}</span>
+          </div>
+        </div>
+        <div class="divider">
+          <div class="divider-row"></div>
+        </div>
+        <div class="sections">
+          <a href="/profile/info" mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span class="sections-text">Meu perfil</span>
+          </a>
+          <button (click)="signOut()" mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon>
+            <span class="sections-text">Sair</span>
+          </button>
+        </div>
+      </mat-menu>
+      <div class="div-icon-notification">
+        <a class="div-icon" mat-icon-button routerLink=".">
+          <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
+        </a>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+</ng-container>

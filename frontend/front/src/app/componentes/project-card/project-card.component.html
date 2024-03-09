@@ -1,0 +1,34 @@
+<div class="container-card" *ngFor="let project of projects">
+  <mat-card class="project-card" (click)="selectProject(project)">
+    <div *ngIf="edit" class="button-container">
+      <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
+        aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()">
+        <mat-icon class="icon">edit</mat-icon>
+      </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button (click)="editProject(project)" mat-menu-item>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteProject(project.id!)">
+            <span>Excluir</span>
+          </button>
+        </mat-menu>
+    </div>
+    <img *ngIf="cover" mat-card-image class="img-card" [src]="project.imgUrl ? project.imgUrl : 'assets/imgs/default-project-orange-portfolio.png'" alt="{{project.title}}">
+    <img *ngIf="!cover" mat-card-image  class="img-card-no-cover" [src]="project.imgUrl ? project.imgUrl : 'assets/imgs/default-project-orange-portfolio.png'" alt="{{project.title}}">
+    <mat-card-header>
+      <div class="card-infos">
+        <div class="data-user">
+          <div mat-card-avatar class="project-header-image" [ngStyle]="getBackgroundStyle(project)"></div>
+          <p> {{project.userName ? project.userName! + " " + project.lastName! : ""}} &nbsp;&bull;
+            {{formatData(project.createdAt)}}</p>
+        </div>
+        <div *ngIf="edit || tags" class="chips">
+          <mat-card-actions *ngFor="let tag of project.tags">
+            <mat-chip>{{tag}}</mat-chip>
+          </mat-card-actions>
+        </div>
+      </div>
+    </mat-card-header>
+  </mat-card>
+</div>
