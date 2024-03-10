@@ -16,11 +16,12 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getUserById(id: string): Observable<IUser> {
-    const apiUrl = new URL(environment.getApiUserId(id),this.API).toString();
+    const apiUrl = new URL(environment.getApiUserId(id), this.API).toString();
     return this.httpClient.get<IUser>(apiUrl);
   }
 
   save(record: IUserRegister): Observable<IUserRegister> {
+    console.log(this.API);
     const apiUrl = new URL(environment.apiUsers, this.API).toString();
     return this.httpClient.post<IUserRegister>(apiUrl, record);
   }

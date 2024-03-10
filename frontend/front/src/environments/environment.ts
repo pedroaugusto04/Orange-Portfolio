@@ -1,6 +1,7 @@
 export const environment = {
-  production: false,
-  baseUrl: "https://hackathon-orange.onrender.com/",
+  production: true,
+  name: "production",
+  baseUrl: "",
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",
