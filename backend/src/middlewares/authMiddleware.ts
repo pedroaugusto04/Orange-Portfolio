@@ -4,7 +4,6 @@ import { verifyToken } from "../utils/jwtAuth";
 export const authenticateMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
   const routeUserId = req.params.id;
-
   if (token) {
     try {
       verifyToken(token, routeUserId);

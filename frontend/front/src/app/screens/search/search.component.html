@@ -1,0 +1,27 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <h5 class="title">
+    Busque inspiração através de outros usuários, compartilhando ideias e formando amizades
+  </h5>
+  <form class = "form" [formGroup]="searchForm" action="">
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>Buscar Usuários</mat-label>
+      <input type="text" formControlName="search" matInput />
+    </mat-form-field>
+  </form>
+  <div class="users">
+    <div class="users">
+      <ng-container *ngIf="users$ | async as users">
+        <ng-container *ngIf="users.length > 0 || !searched; else noUsers">
+          <button *ngFor="let user of users">
+            <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Profile Icon" />
+            <h5>{{ user.name }} {{ user.lastName }}</h5>
+          </button>
+        </ng-container>
+      </ng-container>
+      <ng-template #noUsers>
+        <p>Nenhum usuário encontrado.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

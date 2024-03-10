@@ -40,6 +40,21 @@ export class UserController {
     }
   }
 
+  public static async getUsersByName(req: Request, res: Response){
+    const name = req.params.name;
+    try {
+      const users = await UserService.getUsersByName(name);
+      if (!users) return res.status(404).json({message: "Sem resultados."});
+      const dtoUsers = users.map(user => {
+        const { password, ...dtoUser } = user;
+        return dtoUser;
+      })
+      res.json(dtoUsers);
+    } catch (error: any) {
+      return res.status(500).json({ message: "Erro interno ao recuperar usuários." });
+    }
+  }
+
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
 

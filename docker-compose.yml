@@ -3,7 +3,16 @@ services:
     build: ./backend
     ports:
       - 3000:3000
+
   front:
     build: ./frontend
+    volumes:
+      - ./frontend/front:/front
     ports:
       - 8080:4200
+
+  watcher:
+    image: node:latest
+    command: "sh -c 'cd /front && npm install && npm run watch'"
+    depends_on:
+      - front

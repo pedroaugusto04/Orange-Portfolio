@@ -10,6 +10,7 @@ userRouter.use(authenticateMiddleware);
 
 userRouter.get("/users", UserController.getAllUsers);
 userRouter.get("/users/:id", UserController.getUserById);
+userRouter.get("/users/name/:name", UserController.getUsersByName);
 userRouter.delete("/users/:id", UserController.deleteUser);
 userRouter.put("/users/:id", UserController.updateUser);
 userRouter.put("/users/:id/password", UserController.updatePassword);

@@ -11,6 +11,12 @@ export class UserService {
     return rows as User[];
   }
 
+  public static async getUsersByName(name: string): Promise<User[] | undefined> {
+    const sqlStatement = "SELECT * FROM users WHERE name LIKE ?";
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, `${name}%`);
+    return rows as User[];
+  }
+
   public static async getUserById(id: string): Promise<User | undefined> {
     const sqlStatement = "SELECT * FROM users WHERE id = ?";
     const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, id);

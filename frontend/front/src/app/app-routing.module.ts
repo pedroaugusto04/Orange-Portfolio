@@ -32,6 +32,12 @@ const routes: Routes = [
     canActivate: [GuardGuard],
   },
   {
+    path: "search",
+    loadChildren: () =>
+      import("./screens/search/search-routing.module").then((m) => m.SearchRoutingModule),
+    canActivate: [GuardGuard],
+  },
+  {
     path: "profile/info",
     loadChildren: () =>
       import("./screens/profile-info/profile-info-routing.module").then((m) => m.ProfileInfoRoutingModule),

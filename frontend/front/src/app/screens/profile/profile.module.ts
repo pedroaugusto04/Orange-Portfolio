@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
+import { NavBarComponent } from 'src/app/componentes/nav-bar/nav-bar.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ProfileComponent } from './profile.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    AppRoutingModule,
+
   ]
 })
 export class ProfileModule { }

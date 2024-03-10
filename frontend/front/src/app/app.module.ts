@@ -35,6 +35,7 @@ import { AuthorizationInterceptorService } from "../app/interceptors/authorizati
 import { ProfileActionComponent } from "./componentes/profile-action/profile-action.component";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { SearchComponent } from "./screens/search/search.component";
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
     NotFoundComponent,
     ProfileInfoComponent,
     ProfileActionComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
