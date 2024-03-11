@@ -4,11 +4,11 @@ https://orange-portfolio-sable.vercel.app/login
 
 ## Descrição
 
-O Orange Portfólio, é uma aplicação web focada na gestão de portfolios para a comunidade de designers, onde os usuários podem adicionar projetos em seu portfolio e buscar inspirações de outros designers dentro da plataforma.
+O Orange Portfólio é uma aplicação web focada na gestão de portfolios para a comunidade de designers, onde os usuários podem adicionar projetos em seu portfolio e buscar inspirações de outros designers dentro da plataforma.
 
 A aplicação foi desenvolvida como parte do Hackathon Programa de Formação 5° edição da FCamara e Orange Juice.
 
-Este projeto é uma continuação da versão desenvolvida no Hackathon. 
+Este projeto é uma continuação independente da versão desenvolvida no Hackathon. 
 
 ## Colaboradores - (aka Squad do taiga)
 
