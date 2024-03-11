@@ -40,7 +40,9 @@ const routes: Routes = [
   {
     path: "profile/info",
     loadChildren: () =>
-      import("./screens/profile-info/profile-info-routing.module").then((m) => m.ProfileInfoRoutingModule),
+      import("./screens/profile-info/profile-info-routing.module").then(
+        (m) => m.ProfileInfoRoutingModule
+      ),
     canActivate: [GuardGuard],
   },
 

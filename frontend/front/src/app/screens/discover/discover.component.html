@@ -1,13 +1,24 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
-  <h5 class="title">Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões
-    inesquecíveis</h5>
+  <ng-container *ngIf="isUniqueUserProjects; else showAllProjects">
+    <div class="user-info">
+      <h4 class = "title-collection">Coleção de:</h4>
+      <img class="profile-img" [src]="userIconUrl || defaultIcon" alt="Profile Icon" />
+      <h5>{{ userName }} {{ userLastName }}</h5>
+    </div>
+  </ng-container>
 
+  <ng-template #showAllProjects>
+    <h5 class="title">
+      Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em
+      conexões inesquecíveis
+    </h5>
+  </ng-template>
   <div class="projects">
     <form [formGroup]="searchForm" action="">
       <mat-form-field class="input" appearance="outline">
         <mat-label>Buscar tags</mat-label>
-        <input type="text" formControlName="search" matInput>
+        <input type="text" formControlName="search" matInput />
       </mat-form-field>
     </form>
     <div class="list-projects">
@@ -16,8 +27,11 @@
       </ng-container>
       <ng-template #hasResults>
         <div *ngIf="searchProjects.length || projects">
-          <app-project-card *ngIf="searchProjects.length || projects" class="projects-list"
-            [projects]="searchProjects.length ? searchProjects : projects" ></app-project-card>
+          <app-project-card
+            *ngIf="searchProjects.length || projects"
+            class="projects-list"
+            [projects]="searchProjects.length ? searchProjects : projects"
+          ></app-project-card>
         </div>
       </ng-template>
     </div>

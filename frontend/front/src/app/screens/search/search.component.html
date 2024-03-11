@@ -3,7 +3,7 @@
   <h5 class="title">
     Busque inspiração através de outros usuários, compartilhando ideias e formando amizades
   </h5>
-  <form class = "form" [formGroup]="searchForm" action="">
+  <form class="form" [formGroup]="searchForm" action="">
     <mat-form-field class="input" appearance="outline">
       <mat-label>Buscar Usuários</mat-label>
       <input type="text" formControlName="search" matInput />
@@ -13,7 +13,10 @@
     <div class="users">
       <ng-container *ngIf="users$ | async as users">
         <ng-container *ngIf="users.length > 0 || !searched; else noUsers">
-          <button *ngFor="let user of users">
+          <button
+            (click)="loadUserProjects(user.id, user.name, user.lastName, user.iconUrl)"
+            *ngFor="let user of users"
+          >
             <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Profile Icon" />
             <h5>{{ user.name }} {{ user.lastName }}</h5>
           </button>

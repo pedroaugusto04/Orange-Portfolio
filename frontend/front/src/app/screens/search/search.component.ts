@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { NavigationExtras, Router } from "@angular/router";
 import { Observable, debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { UserService } from "src/app/appServices/user.service";
 import { IUser } from "src/app/models/iUser";
@@ -10,7 +11,11 @@ import { IUser } from "src/app/models/iUser";
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   searchForm = this.formBuilder.group({
     search: [""],
@@ -33,5 +38,10 @@ export class SearchComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  loadUserProjects(userId: string, userName: string,userLastName: string,userIconUrl: string): void {
+    this.router.navigate(["/discover"],{state : {userId: userId, userName: userName,userLastName: userLastName, userIconUrl:
+    userIconUrl}});
   }
 }

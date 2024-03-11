@@ -4,6 +4,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { NavBarService } from "./services/nav-bar.service";
 import { IUser } from "src/app/models/iUser";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-nav-bar",
@@ -11,20 +12,20 @@ import { Observable } from "rxjs";
   styleUrls: ["./nav-bar.component.scss"],
 })
 export class NavBarComponent implements OnInit {
-
   isMobile!: boolean;
   user$!: Observable<IUser>;
   defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
 
   ngOnInit(): void {
     const userId = JSON.parse(sessionStorage.getItem("id") ?? "");
-    this.user$  = this.navBarService.getUserInfo(userId);
+    this.user$ = this.navBarService.getUserInfo(userId);
   }
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private navBarService: NavBarService
+    private navBarService: NavBarService,
+    private router: Router
   ) {
     this.isMobile = window.innerWidth < 600;
     this.matIconRegistry.addSvgIcon(
@@ -51,5 +52,23 @@ export class NavBarComponent implements OnInit {
   onResize(event: any) {
     this.isMobile = event.target.innerWidth < 600;
     // redirecionar
+  }
+
+  goToProjects() {
+    this.router.navigate(["/profile"]);
+  }
+
+  goToDiscover() {
+    if (this.router.url === "/discover") {
+      this.router.navigate(["/dummy"]).then(() => {
+        this.router.navigate(["/discover"]);
+      });
+    } else {
+      this.router.navigate(["discover"]);
+    }
+  }
+
+  goToSearch() {
+    this.router.navigate(["/search"]);
   }
 }

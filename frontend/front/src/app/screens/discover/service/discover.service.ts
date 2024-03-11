@@ -12,6 +12,10 @@ export class DiscoverService {
   getProjectsDiscover(): Observable<IProject[]> {
   return this.projectService.getProjects();
   }
+  
+  getProjectsDiscoverByUserId(userId: string): Observable<IProject[]> {
+    return this.projectService.getProjectsByUserId(userId);
+  }
 
   fillProjectDiscover(projectData: IProject): IProject{
     return this.projectService.fillProject(projectData);

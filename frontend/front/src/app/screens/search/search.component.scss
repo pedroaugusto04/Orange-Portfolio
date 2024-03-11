@@ -40,10 +40,6 @@ h5 {
   line-height: 1.5;
 }
 
-p {
-  padding-left: 2rem;
-}
-
 .profile-img {
   border-radius: 100px;
   max-width: 7.625rem;
@@ -61,5 +57,9 @@ p {
 
   .form {
     margin-left: 3.5rem;
+  }
+
+  p {
+    padding-left: 2rem;
   }
 }
