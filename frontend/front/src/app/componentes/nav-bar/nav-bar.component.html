@@ -44,14 +44,14 @@
       </mat-menu>
       <div class="right-side">
         <div class="div-logo">
-          <a routerLink="/profile">
+          <a routerLink="/profile" accesskey="1">
             <mat-icon id="icon-logo" svgIcon="Logo Orange Juice">menu</mat-icon>
           </a>
         </div>
         <div class="sections" fxShow.gt-sm fxHide.lt-md>
-          <a id="my-projects" href="#" (click)="goToProjects($event)">Meus Projetos</a>
-          <a class="link-menu" href="#" (click)="goToDiscover($event)">Descobrir</a>
-          <a class="link-menu" href="#" (click)="goToSearch($event)">Buscar</a>
+          <a id="my-projects" href="#" (click)="goToProjects($event)" accesskey="2">Meus Projetos</a>
+          <a class="link-menu" href="#" (click)="goToDiscover($event)" accesskey="3">Descobrir</a>
+          <a class="link-menu" href="#" (click)="goToSearch($event)" accesskey="4">Buscar</a>
         </div>
       </div>
       <div class="div-icons">
@@ -59,7 +59,8 @@
           <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Foto de perfil do usuário {{ user.name }}" />
         </a>
         <a class="div-profile-img" href = "#" *ngIf="!isMobile" [matMenuTriggerFor]="menu2"
-        (click)="onMenuClick($event)">
+        (click)="onMenuClick($event)"
+        accesskey="5">
           <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Foto de perfil do usuário {{ user.name }}" />
         </a>
         <mat-menu class="mat-menu" #menu2="matMenu">
