@@ -14,29 +14,29 @@
         <div class="divider">
           <div class="divider-row"></div>
         </div>
-        <div class="sections">
-          <a *ngIf="isMobile" href="/profile/info" mat-menu-item>
+        <div class="sections" role="menu">
+          <button *ngIf="isMobile" mat-menu-item routerLink="/profile/info" role="menuitem" aria-label="Meu perfil">
             <mat-icon>person</mat-icon>
             <span class="sections-text">Meu perfil</span>
-          </a>
+          </button>
 
-          <button mat-menu-item (click)="goToProjects()">
+          <button mat-menu-item (click)="goToProjects($event)" role="menuitem" aria-label="Meus projetos">
             <span class="sections-text">Meus projetos</span>
           </button>
 
-          <button mat-menu-item (click)="goToDiscover()">
+          <button mat-menu-item (click)="goToDiscover($event)" role="menuitem" aria-label="Descobrir">
             <span class="sections-text">Descobrir</span>
           </button>
 
-          <button mat-menu-item (click)="goToSearch()">
+          <button mat-menu-item (click)="goToSearch($event)" role="menuitem" aria-label="Buscar">
             <span class="sections-text">Buscar</span>
           </button>
 
-          <div class="divider">
+          <div class="divider" role="separator" aria-hidden="true">
             <div class="divider-row"></div>
           </div>
 
-          <button mat-menu-item (click)="signOut()">
+          <button mat-menu-item (click)="signOut()" role="menuitem" aria-label="Sair da aplicação">
             <mat-icon>exit_to_app</mat-icon>
             <span class="sections-text">Sair</span>
           </button>
@@ -49,23 +49,24 @@
           </a>
         </div>
         <div class="sections" fxShow.gt-sm fxHide.lt-md>
-          <a id="my-projects" (click)="goToProjects()">Meus Projetos</a>
-          <a class="link-menu" (click)="goToDiscover()">Descobrir</a>
-          <a class="link-menu" (click)="goToSearch()">Buscar</a>
+          <a id="my-projects" href="#" (click)="goToProjects($event)">Meus Projetos</a>
+          <a class="link-menu" href="#" (click)="goToDiscover($event)">Descobrir</a>
+          <a class="link-menu" href="#" (click)="goToSearch($event)">Buscar</a>
         </div>
       </div>
       <div class="div-icons">
-        <a class="div-profile-img" routerLink="/profile/info" *ngIf="isMobile">
+        <a class="div-profile-img" href = "#" routerLink="/profile/info" *ngIf="isMobile">
           <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}" />
         </a>
-        <a class="div-profile-img" *ngIf="!isMobile" [matMenuTriggerFor]="menu2">
+        <a class="div-profile-img" href = "#" *ngIf="!isMobile" [matMenuTriggerFor]="menu2"
+        (click)="onMenuClick($event)">
           <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}" />
         </a>
         <mat-menu class="mat-menu" #menu2="matMenu">
           <div class="info-user">
             <div class="info-user-text">
-              <span id="username-info">{{ user.name }}</span>
-              <span id="username-email-info">{{ user.email }}</span>
+              <span id="username-info" href="#">{{ user.name }}</span>
+              <span id="username-email-info" href="#">{{ user.email }}</span>
             </div>
           </div>
           <div class="divider">
@@ -82,11 +83,11 @@
             </button>
           </div>
         </mat-menu>
-        <div class="div-icon-notification">
+        <!--<div class="div-icon-notification">
           <a class="div-icon" mat-icon-button routerLink=".">
             <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
           </a>
-        </div>
+        </div>-->
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

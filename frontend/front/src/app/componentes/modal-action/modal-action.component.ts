@@ -155,7 +155,8 @@ export class ModalActionComponent implements OnInit {
     });
   }
 
-  viewProject() {
+  viewProject(event: Event) {
+    event.preventDefault();
     const projectForm = this.form.value;
     const project: IProject = {
       userName: this.user.name,

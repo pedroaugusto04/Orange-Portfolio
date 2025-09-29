@@ -54,11 +54,13 @@ export class NavBarComponent implements OnInit {
     // redirecionar
   }
 
-  goToProjects() {
+  goToProjects(event: Event) {
+    event.preventDefault();
     this.router.navigate(["/profile"]);
   }
 
-  goToDiscover() {
+  goToDiscover(event: Event) {
+    event.preventDefault();
     if (this.router.url === "/discover") {
       this.router.navigate(["/dummy"]).then(() => {
         this.router.navigate(["/discover"]);
@@ -68,7 +70,12 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  goToSearch() {
+  goToSearch(event: Event) {
+    event.preventDefault();
     this.router.navigate(["/search"]);
+  }
+
+  onMenuClick(event: Event) {
+    event.preventDefault(); 
   }
 }

@@ -1,8 +1,12 @@
 <div class="container-card" *ngFor="let project of projects">
-  <mat-card class="project-card" (click)="selectProject(project)">
+  <mat-card class="project-card" (click)="selectProject(project)" tabindex="0"
+   (keydown.enter)="selectProject(project)"
+   (keydown.space)="selectProject(project)">
     <div *ngIf="edit" class="button-container">
       <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
-        aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()">
+        aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()"
+        (keydown.enter)="$event.stopPropagation()"
+        (keydown.space)="$event.stopPropagation()">
         <mat-icon class="icon">edit</mat-icon>
       </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
