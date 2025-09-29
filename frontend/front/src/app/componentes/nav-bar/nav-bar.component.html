@@ -1,13 +1,7 @@
 <ng-container *ngIf="user$ | async as user">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <button
-        class="button-menu"
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Menu button"
-        fxHide.gt-sm
-      >
+      <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu class="mat-menu" #menu="matMenu">
@@ -25,19 +19,24 @@
             <mat-icon>person</mat-icon>
             <span class="sections-text">Meu perfil</span>
           </a>
-          <button mat-menu-item>
-            <span class="sections-text" (click)="goToProjects()">Meus projetos</span>
+
+          <button mat-menu-item (click)="goToProjects()">
+            <span class="sections-text">Meus projetos</span>
           </button>
-          <button mat-menu-item>
-            <span class="sections-text" (click)="goToDiscover()">Descobrir</span>
+
+          <button mat-menu-item (click)="goToDiscover()">
+            <span class="sections-text">Descobrir</span>
           </button>
-          <button mat-menu-item>
-            <span class="sections-text" (click)="goToSearch()">Buscar</span>
+
+          <button mat-menu-item (click)="goToSearch()">
+            <span class="sections-text">Buscar</span>
           </button>
+
           <div class="divider">
             <div class="divider-row"></div>
           </div>
-          <button (click)="signOut()" mat-menu-item>
+
+          <button mat-menu-item (click)="signOut()">
             <mat-icon>exit_to_app</mat-icon>
             <span class="sections-text">Sair</span>
           </button>
