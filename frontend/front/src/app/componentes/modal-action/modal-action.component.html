@@ -56,13 +56,23 @@
               <label>Compartilhe seu talento com milhares de pessoas</label>
             </span>
           </div>
-          <img *ngIf="selectedImage" class="project-cover" [src]="selectedImage" alt="Imagem do projeto" />
+          <img *ngIf="selectedImage" class="project-cover" [src]="selectedImage" alt="Imagem do projeto" title="Imagem do projeto" />
         </button>
       </div>
     </div>
   </div>
   <div class="div-finish-modal">
-    <a type="button" href = "#" (click)="viewProject($event)" class="subtitle-1"> Visualizar publicação</a>
+    <form [formGroup]="form">
+      <mat-form-field id="img-description-field" class="input img-desc" appearance="outline">
+        <mat-label>Descrição da Imagem</mat-label>
+        <input #imgDescriptionInput matInput formControlName="imgDescription" />
+        <mat-error *ngIf="form.get('imgDescription')?.invalid">
+          {{ formErrorMessage("imgDescription") }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <a type="button" href="#" (click)="viewProject($event)" class="subtitle-1"> Visualizar publicação</a>
     <mat-dialog-actions class="button-container">
       <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject()" mat-button
         mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>

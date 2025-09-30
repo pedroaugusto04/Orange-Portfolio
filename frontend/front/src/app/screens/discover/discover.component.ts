@@ -4,6 +4,7 @@ import { FormBuilder } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { DiscoverService } from "./service/discover.service";
 import { Router } from "@angular/router";
+import { UserService } from "src/app/appServices/user.service";
 
 @Component({
   selector: "app-discover",
@@ -32,12 +33,13 @@ export class DiscoverComponent implements OnInit {
   userName: string = "";
   userLastName: string = "";
   userIconUrl: string = "";
-  
+
   defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
 
   constructor(
     private formBuilder: FormBuilder,
     private discoverService: DiscoverService,
+    private userService: UserService,
     private route: Router
   ) {
     this.state = this.route.getCurrentNavigation()?.extras.state;
@@ -54,17 +56,15 @@ export class DiscoverComponent implements OnInit {
     } else {
       this.getAllProjects();
     }
-    this.searchForm
-      .get("search")
-      ?.valueChanges.pipe(
-        map((value) => value!.trim()),
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap(async (value) => {
-          this.handleSearch(value);
-        })
-      )
-      .subscribe();
+    this.searchForm.get("search")?.valueChanges.pipe(
+      map(value => value?.trim() || ''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(value => this.userService.getWordSuggestions(value))
+    ).subscribe(suggestions => {
+      console.log(suggestions)
+      this.tags = suggestions;  
+    });
   }
 
   getAllProjects() {

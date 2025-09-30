@@ -11,5 +11,6 @@ projectRouter.get("/projects/user/:userId", ProjectController.getAllProjectsByUs
 projectRouter.post("/projects", ProjectController.createProject);
 projectRouter.put("/projects/:id", ProjectController.updateProject);
 projectRouter.delete("/projects/:id", ProjectController.deleteProject);
+projectRouter.get("/projects/suggest-word", ProjectController.getWordSuggestion);
 
 export { projectRouter };

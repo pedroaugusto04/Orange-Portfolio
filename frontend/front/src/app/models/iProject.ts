@@ -3,6 +3,7 @@ export interface IProject {
   tags: string[];
   link?: string;
   description: string;
+  imgDescription?: string;
   imgUrl?: string | FormData;
   createdAt: string;
   id?: string;

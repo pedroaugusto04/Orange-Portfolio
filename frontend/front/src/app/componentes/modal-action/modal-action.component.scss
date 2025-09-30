@@ -15,6 +15,11 @@ h5 {
   line-height: 1.5rem;
 }
 
+.img-desc {
+  margin-top: 0.2rem;
+  width: 24.3125rem;
+}
+
 .subtitle-1 {
   text-decoration: none;
   align-self: stretch;
@@ -64,6 +69,7 @@ h5 {
   font-size: 2.857rem;
   margin-bottom: 1rem;
 }
+
 .empty-projects {
   display: flex;
   align-items: center;
@@ -78,6 +84,7 @@ h5 {
 .button-container {
   padding: 0 !important;
 }
+
 .project-cover {
   width: 100%;
   border-radius: 0.25rem;
@@ -91,6 +98,7 @@ h5 {
   align-items: flex-start;
   gap: var(--2, 1rem);
 }
+
 .projects button {
   cursor: pointer;
   border: none;
@@ -135,10 +143,12 @@ h5 {
 .upload-img {
   margin-top: 4rem;
 }
+
 @media screen and (min-width: 992px) {
   .upload-img {
     margin-top: 0;
   }
+
   .container {
     display: flex;
     flex-direction: row-reverse;

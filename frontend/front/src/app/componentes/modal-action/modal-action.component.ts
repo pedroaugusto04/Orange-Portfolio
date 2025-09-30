@@ -61,6 +61,7 @@ export class ModalActionComponent implements OnInit {
   ngOnInit(): void {
     // Logica para preencher informaçoes do projeto ao editá-lo
     const currentProject = this.modalService.currentProject;
+
     if (currentProject) {
       this.project = currentProject.data;
     }
@@ -74,6 +75,7 @@ export class ModalActionComponent implements OnInit {
       tags: "",
       link: [this.project ? this.project.link : "", [isLink(), Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
+      imgDescription: [this.project ? this.project.imgDescription : "", [Validators.required, Validators.maxLength(250)]]
     });
     this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
   }
@@ -88,6 +90,9 @@ export class ModalActionComponent implements OnInit {
     }
     if (field?.hasError("minlength")) {
       return "Este campo está muito curto";
+    }
+    if (field?.hasError("maxlength")) {
+      return "Este campo está muito longo";
     }
     if (field?.hasError("link")) {
       return "Link inválido";
@@ -124,6 +129,7 @@ export class ModalActionComponent implements OnInit {
     this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
+    this.formData.append("imgDescription", this.form.value.imgDescription)
     this.formData.append("idUser", idUser);
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
@@ -143,6 +149,7 @@ export class ModalActionComponent implements OnInit {
     this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
+    this.formData.append("imgDescription", this.form.value.imgDescription);
     this.formData.append("idUser", idUser);
     this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
@@ -166,6 +173,7 @@ export class ModalActionComponent implements OnInit {
       tags: this.tags,
       link: projectForm.link,
       description: projectForm.description,
+      imgDescription: projectForm.imgDescription,
       createdAt: projectForm.createdAt,
       imgUrl: this.selectedImage,
     };

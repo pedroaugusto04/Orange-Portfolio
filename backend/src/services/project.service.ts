@@ -17,7 +17,7 @@ export class ProjectService {
   public static async getAllProjects(): Promise<Project[]> {
     const sqlStatement =
       "SELECT " +
-      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, " +
+      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, p.imgDescription, " +
       "u.name AS userName, u.lastName, u.iconUrl " +
       "FROM projects p " +
       "INNER JOIN " +
@@ -35,7 +35,7 @@ export class ProjectService {
   public static async getAllProjectsByUserId(userId: string): Promise<Project[]> {
     const sqlStatement =
       "SELECT " +
-      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, " +
+      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, p.imgDescription, " +
       "u.name AS userName, u.lastName, u.iconUrl " +
       "FROM projects p " +
       "INNER JOIN " +

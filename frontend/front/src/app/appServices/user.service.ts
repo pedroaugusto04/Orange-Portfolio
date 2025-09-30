@@ -3,19 +3,26 @@ import { Injectable } from "@angular/core";
 import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
 import { IUserLogin, LoginResponse } from "../models/iUserLogin";
-import { Observable } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { IUser } from "../models/iUser";
 import { IUserUpdatePassword } from "../models/iUserUpdatePassword";
+
+interface SuggestionResponse {
+  suggestion: string;
+}
+
 
 @Injectable({
   providedIn: "root",
 })
+
 export class UserService {
   private readonly API = environment.baseUrl;
+  private suggestWordUrl = 'http://localhost:3000/projects/suggest-word';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-  getUsersByName(name: string): Observable<IUser[]>{
+  getUsersByName(name: string): Observable<IUser[]> {
     const apiUrl = new URL(environment.getApiUsersByName(name), this.API).toString();
     return this.httpClient.get<IUser[]>(apiUrl);
   }
@@ -49,5 +56,21 @@ export class UserService {
     const apiUrl = new URL(environment.getApiIsGoogleLogin(id), this.API).toString();
     const reqBody = {};
     return this.httpClient.get<boolean>(apiUrl, reqBody);
+  }
+
+  getWordSuggestions(query: string): Observable<string[]> {
+    if (!query || query.trim() === '') {
+      return of([]);
+    }
+
+    return this.httpClient.get<SuggestionResponse>(`${this.suggestWordUrl}?prefix=${query}`).pipe(
+      map(response => {
+        return response.suggestion ? [response.suggestion] : [];
+      }),
+      catchError(error => {
+        console.error('Erro ao buscar sugestão do backend:', error);
+        return of([]);
+      })
+    );
   }
 }

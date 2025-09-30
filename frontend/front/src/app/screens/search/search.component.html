@@ -17,7 +17,7 @@
             (click)="loadUserProjects(user.id, user.name, user.lastName, user.iconUrl)"
             *ngFor="let user of users"
           >
-            <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário" />
+            <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{user.name}}" title="Ícone de perfil do usuário {{user.name}}" />
             <h5>{{ user.name }} {{ user.lastName }}</h5>
           </button>
         </ng-container>

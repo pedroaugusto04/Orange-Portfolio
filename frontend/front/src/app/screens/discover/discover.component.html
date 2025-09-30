@@ -3,7 +3,7 @@
   <ng-container *ngIf="isUniqueUserProjects; else showAllProjects">
     <div class="user-info">
       <h4 class = "title-collection">Coleção de:</h4>
-      <img class="profile-img" [src]="userIconUrl || defaultIcon" alt="Ícone de perfil do usuário" />
+      <img class="profile-img" [src]="userIconUrl || defaultIcon" alt="Ícone de perfil do usuário {{userName}}" title="Ícone de perfil do usuário {{userName}}" />
       <h5>{{ userName }} {{ userLastName }}</h5>
     </div>
   </ng-container>

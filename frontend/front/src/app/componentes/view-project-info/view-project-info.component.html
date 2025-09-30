@@ -6,7 +6,7 @@
   </div>
   <div class="main-info">
     <div class="profile-info">
-      <img class="profile-img" [src]="modal.project.iconUrl ? modal.project.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Imagem de perfil do usuário">
+      <img class="profile-img" [src]="modal.project.iconUrl ? modal.project.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Ícone de perfil do usuário {{modal.project.userName}}" title="Ícone de perfil do usuário {{modal.project.userName}}">
       <span id="username">{{ modal.project.userName}} {{ modal.project.lastName }}<br> <span id = "date">{{currentDate()}}</span>
     </span>
     </div>
@@ -20,7 +20,7 @@
   <!-- carregar componente de upload-->
   <div class="upload-img">
     <div class="projects">
-      <img [src]="modal.project.imgUrl ? modal.project.imgUrl : 'assets/imgs/default-project-orange-portfolio.png'" class="project-cover" alt="Imagem do projeto selecionado" />
+      <img [src]="modal.project.imgUrl ? modal.project.imgUrl : 'assets/imgs/default-project-orange-portfolio.png'" class="project-cover"  title="{{ modal.project.imgDescription || 'Imagem do Projeto' }}"  />
     </div>
   </div>
   <div class="project-description">

@@ -4,6 +4,7 @@ export interface Project {
   tags: string;
   link: string;
   description: string;
+  imgDescription: string;
   imgUrl: string;
   idUser: string;
   iconUrl: string;
