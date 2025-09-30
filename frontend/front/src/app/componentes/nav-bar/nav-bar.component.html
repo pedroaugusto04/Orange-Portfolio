@@ -46,7 +46,7 @@
         <div class="div-logo">
           <a routerLink="/profile" accesskey="1">
             <mat-icon id="icon-logo" svgIcon="Logo Orange Juice" aria-label="Logomarca do Orange Portfolio"
-            title="Logomarca do Orange Portfolio">menu</mat-icon>
+            >menu</mat-icon>
           </a>
         </div>
         <div class="sections" fxShow.gt-sm fxHide.lt-md>
@@ -57,12 +57,12 @@
       </div>
       <div class="div-icons">
         <a class="div-profile-img" href = "#" routerLink="/profile/info" *ngIf="isMobile">
-          <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{ user.name }}" title="Ícone de perfil do usuário {{ user.name }}" />
+          <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{ user.name }}" />
         </a>
         <a class="div-profile-img" href = "#" *ngIf="!isMobile" [matMenuTriggerFor]="menu2"
         (click)="onMenuClick($event)"
         accesskey="5">
-          <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{ user.name }}" title="Ícone de perfil do usuário {{ user.name }}" />
+          <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{ user.name }}" />
         </a>
         <mat-menu class="mat-menu" #menu2="matMenu">
           <div class="info-user">

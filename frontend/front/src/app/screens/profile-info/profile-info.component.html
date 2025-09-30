@@ -10,13 +10,13 @@
             selectedImage ||
             (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')
           "
-          alt="Ícone de perfil do usuário {{user.name}}" title="Ícone de perfil do usuário {{user.name}}"
+          alt="Ícone de perfil do usuário {{user.name}}" 
         />
         <img
           class="profile-img"
           *ngIf="!selectedImage"
           [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'"
-          alt="Ícone de perfil do usuário {{user.name}}" title="Ícone de perfil do usuário {{user.name}}"
+          alt="Ícone de perfil do usuário {{user.name}}" 
         />
       </div>
       <div class="user-data">
