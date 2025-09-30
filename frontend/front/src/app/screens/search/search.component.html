@@ -6,18 +6,24 @@
   <form class="form" [formGroup]="searchForm" action="">
     <mat-form-field class="input" appearance="outline">
       <mat-label>Buscar Usuários</mat-label>
-      <input type="text" formControlName="search" matInput />
+      <input type="text" formControlName="search" matInput [matAutocomplete]="auto" />
+
+      <mat-autocomplete #auto="matAutocomplete"
+        (optionSelected)="loadUserProjects($event.option.value.id, $event.option.value.name, $event.option.value.lastName, $event.option.value.iconUrl)">
+        <mat-option *ngFor="let user of filteredUsers$ | async" [value]="user">
+          {{ user.name }} {{ user.lastName }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </form>
   <div class="users">
     <div class="users">
       <ng-container *ngIf="users$ | async as users">
         <ng-container *ngIf="users.length > 0 || !searched; else noUsers">
-          <button
-            (click)="loadUserProjects(user.id, user.name, user.lastName, user.iconUrl)"
-            *ngFor="let user of users"
-          >
-            <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{user.name}}" title="Ícone de perfil do usuário {{user.name}}" />
+          <button (click)="loadUserProjects(user.id, user.name, user.lastName, user.iconUrl)"
+            *ngFor="let user of users">
+            <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="Ícone de perfil do usuário {{user.name}}"
+              title="Ícone de perfil do usuário {{user.name}}" />
             <h5>{{ user.name }} {{ user.lastName }}</h5>
           </button>
         </ng-container>

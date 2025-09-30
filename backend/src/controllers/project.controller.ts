@@ -3,18 +3,11 @@ import { Request, Response } from "express";
 import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
 import { UserService } from "../services/user.service";
-import * as dotenv from "dotenv";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-dotenv.config();
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
 export class ProjectController {
   public static async createProject(req: Request, res: Response) {
     const newProject: Project = req.body;
-    
+
     if (
       !newProject ||
       !newProject.title ||
@@ -22,7 +15,7 @@ export class ProjectController {
       !newProject.imgDescription ||
       !newProject.tags ||
       !newProject.link ||
-      !newProject.idUser 
+      !newProject.idUser
     ) {
       return res
         .status(422)
@@ -105,25 +98,13 @@ export class ProjectController {
     }
   }
 
-  public static async getWordSuggestion(req: Request, res: Response) {
+  public static async getAllTags(req: Request, res: Response) {
     try {
-      const { prefix } = req.query;
-
-      if (!prefix || typeof prefix !== 'string') {
-        return res.status(422).json({ message: "Parâmetro 'prefix' é obrigatório e deve ser uma string." });
-      }
-
-      const prompt = `A partir do prefixo ou da palavra/frase incompleta "${prefix}", sugira a continuação mais provável em português, como faria um sistema de autocomplete de navegador. Respeite a continuação literal do que foi digitado e complete a palavra/frase de forma natural. O contexto é um site de busca de projetos e portfólios de outros usuários, então priorize termos relacionados a esse tema quando aplicável. Responda APENAS com a palavra ou frase completa, sem frases adicionais, pontuação ou explicações.`;
-
-      const result = await geminiModel.generateContent(prompt);
-      const response = await result.response;
-
-      const suggestion = response.text().trim().split(' ')[0]; 
-
-      return res.status(200).json({ suggestion });
-
+      const uniqueTags = await ProjectService.getAllUniqueTags();
+      return res.status(200).json(uniqueTags);
     } catch (error) {
-      return res.status(500).json({ message: "Ocorreu um erro interno ao gerar a sugestão." });
+      console.error(error);
+      return res.status(500).json({ message: "Erro ao recuperar tags" });
     }
   }
 }

@@ -2,9 +2,10 @@ import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
 import { IProject } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
-import { Observable, debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
+import { Observable, debounceTime, distinctUntilChanged, map, startWith, switchMap } from "rxjs";
 import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
 import { IUser } from "src/app/models/iUser";
+import { ProjectService } from "src/app/appServices/project.service";
 
 @Component({
   selector: "app-profile",
@@ -29,9 +30,13 @@ export class ProfileComponent implements OnInit {
   //Array para projetos
   projects: IProject[] = [];
 
+  allTags: string[] = [];
+  filteredTags!: Observable<string[]>;
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
+    private projectsService: ProjectService,
     private modalActionService: ModalActionService
   ) {
     this.modalActionService.notification.subscribe(() => {
@@ -40,7 +45,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.projectsService.getTags().subscribe(tags => {
+      this.allTags = tags;
+      this.filteredTags = this.searchForm.get('search')!.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterTags(value))
+      );
+    });
     const userId = JSON.parse(sessionStorage.getItem("id") || "");
     this.user$ = this.profileService.getUserInfo(userId);
     this.projects = [];
@@ -65,6 +76,11 @@ export class ProfileComponent implements OnInit {
       return project.tags && project.tags.some((tag) => tag.toLowerCase().startsWith(lowerCaseValue));
     });
     this.searchResultEmpty = this.searchProjects.length === 0;
+  }
+
+  private _filterTags(value: string | null): string[] {
+    const filterValue = (value || '').toLowerCase();
+    return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 
   openDialog(name: string) {

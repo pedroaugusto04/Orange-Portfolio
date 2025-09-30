@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import { IProject } from "../models/iProject";
+import { preSelectedTags } from "../componentes/modal-action/helper";
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +11,7 @@ import { IProject } from "../models/iProject";
 export class ProjectService {
   private readonly API = environment.baseUrl;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   fillProject(projectData: any): IProject {
     const project: IProject = {
@@ -37,6 +38,16 @@ export class ProjectService {
   getProjects(): Observable<IProject[]> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
     return this.httpClient.get<IProject[]>(apiUrl);
+  }
+
+  getTags(): Observable<string[]> {
+    const apiUrl = new URL(environment.apiTags, this.API).toString();
+    return this.httpClient.get<string[]>(apiUrl).pipe(
+      map(apiTags => {
+        const combinedTags = Array.from(new Set([...preSelectedTags, ...apiTags]));
+        return combinedTags;
+      })
+    );
   }
 
   getProjectsByUserId(id: string): Observable<IProject[]> {

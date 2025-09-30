@@ -81,4 +81,23 @@ export class ProjectService {
 
     return result.affectedRows > 0;
   }
+
+  public static async getAllUniqueTags(): Promise<string[]> {
+    const sqlStatement = "SELECT tags FROM projects";
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement);
+
+    const allTags: string[] = [];
+
+    rows.forEach((row) => {
+      if (row.tags) {
+        row.tags.split(",").forEach((tag: string) => {
+          allTags.push(tag.trim());
+        });
+      }
+    });
+
+    const uniqueTags = Array.from(new Set(allTags));
+
+    return uniqueTags;
+  }
 }

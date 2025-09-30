@@ -32,6 +32,11 @@ export class UserService {
     return this.httpClient.get<IUser>(apiUrl);
   }
 
+  getUsers(): Observable<IUser[]> {
+    const apiUrl = new URL(environment.apiUsers, this.API).toString();
+    return this.httpClient.get<IUser[]>(apiUrl);
+  }
+
   save(record: IUserRegister): Observable<IUserRegister> {
     const apiUrl = new URL(environment.apiUsers, this.API).toString();
     return this.httpClient.post<IUserRegister>(apiUrl, record);

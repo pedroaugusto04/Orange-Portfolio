@@ -2,8 +2,9 @@
 <div class="container">
   <ng-container *ngIf="isUniqueUserProjects; else showAllProjects">
     <div class="user-info">
-      <h4 class = "title-collection">Coleção de:</h4>
-      <img class="profile-img" [src]="userIconUrl || defaultIcon" alt="Ícone de perfil do usuário {{userName}}" title="Ícone de perfil do usuário {{userName}}" />
+      <h4 class="title-collection">Coleção de:</h4>
+      <img class="profile-img" [src]="userIconUrl || defaultIcon" alt="Ícone de perfil do usuário {{userName}}"
+        title="Ícone de perfil do usuário {{userName}}" />
       <h5>{{ userName }} {{ userLastName }}</h5>
     </div>
   </ng-container>
@@ -18,7 +19,13 @@
     <form [formGroup]="searchForm" action="">
       <mat-form-field class="input" appearance="outline">
         <mat-label>Buscar tags</mat-label>
-        <input type="text" formControlName="search" matInput />
+        <input type="text" formControlName="search" matInput [matAutocomplete]="auto" />
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </form>
     <div class="list-projects">
@@ -27,11 +34,8 @@
       </ng-container>
       <ng-template #hasResults>
         <div *ngIf="searchProjects.length || projects">
-          <app-project-card
-            *ngIf="searchProjects.length || projects"
-            class="projects-list"
-            [projects]="searchProjects.length ? searchProjects : projects"
-          ></app-project-card>
+          <app-project-card *ngIf="searchProjects.length || projects" class="projects-list"
+            [projects]="searchProjects.length ? searchProjects : projects"></app-project-card>
         </div>
       </ng-template>
     </div>
