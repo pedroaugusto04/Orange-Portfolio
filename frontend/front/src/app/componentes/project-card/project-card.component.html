@@ -4,7 +4,7 @@
    (keydown.space)="selectProject(project)">
     <div *ngIf="edit" class="button-container">
       <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
-        aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()"
+        aria-label="Editar Projeto" (click)="$event.stopPropagation()"
         (keydown.enter)="$event.stopPropagation()"
         (keydown.space)="$event.stopPropagation()">
         <mat-icon class="icon">edit</mat-icon>

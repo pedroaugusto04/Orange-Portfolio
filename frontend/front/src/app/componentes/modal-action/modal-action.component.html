@@ -11,7 +11,7 @@
           </mat-form-field>
           <mat-form-field class="input" appearance="outline" [floatLabel]="tags.length > 0 ? 'always' : 'auto'">
             <mat-label>Tags</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter Tags" [formControl]="formControl">
+            <mat-chip-grid #chipGrid aria-label="Adicione Tags" [formControl]="formControl">
               <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
                 {{ tag }}
                 <button matChipRemove aria-label="'remove ' + tag">
